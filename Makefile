@@ -8,6 +8,8 @@ allowed_namespaces:="demo,applications"
 
 flux_forward_namespace:="flux"
 
+git_tag:=$(git describe --abbrev=0 --tags)
+
 .PHONY: run-local
 run-local:
 	FLUX_FORWARD_NAMESPACE=$(flux_forward_namespace) FLUXBOT_ALLOWED_NAMESPACES=$(allowed_namespaces) ./bin/hubot --adapter slack
@@ -24,9 +26,9 @@ run:
 
 .PHONY: build
 build:
-	docker build -t $(repo_owner)/$(repo_name):latest .
+	docker build -t $(repo_owner)/$(repo_name):$(git_tag) .
 
 .PHONY: push
 push:
-	docker push $(repo_owner)/$(repo_name):latest
+	docker push $(repo_owner)/$(repo_name):$(git_tag)
 
