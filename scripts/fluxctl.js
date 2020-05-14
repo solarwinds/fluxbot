@@ -16,6 +16,7 @@
 
 module.exports = function(robot) {
   var allowed_namespaces
+  var debug = false
   const default_namespace = "default" // not really useful
 
 
@@ -33,6 +34,11 @@ module.exports = function(robot) {
     process.exit(1)
   }
 
+  if (process.env.HUBOT_DEBUG_MODE) {
+    debug = true
+    console.log("~~~~~~~~~~~~~~~~DEBUG MODE ENABLED~~~~~~~~~~~~")
+  }
+
 
   //
   // Returns the namespaces that this Fluxbot will deal with
@@ -45,7 +51,7 @@ module.exports = function(robot) {
   // workloads provides all workloads in the given namespace
   //
   robot.respond(/workloads\s*(\w+)?$/i, function(msg) {
-    args =  ["list-workloads"]
+    args =  ["list-workloads", "-o json"]
 
     var namespace = msg.match[1]
 
@@ -69,11 +75,19 @@ module.exports = function(robot) {
     const cmd = this.spawn("fluxctl", args);
 
     cmd.stdout.on('data', data => {
-      msg.send(data)
+      if (debug) {
+        console.log("STDOUT:")
+        console.log(data.toString())
+      }
+      msg.send(data.toString())
     });
 
     cmd.stderr.on('data', data => {
-      msg.send(data)
+      if (debug) {
+        console.log("STDERR:")
+        console.log(data.toString())
+      }
+      msg.send(data.toString())
     });
 
     return cmd.on('close', function(code) {

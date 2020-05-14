@@ -10,7 +10,7 @@ flux_forward_namespace:="flux"
 
 .PHONY: run-local
 run-local:
-	FLUX_FORWARD_NAMESPACE=$(flux_forward_namespace) FLUXBOT_ALLOWED_NAMESPACES=$(allowed_namespaces) ./bin/hubot
+	FLUX_FORWARD_NAMESPACE=$(flux_forward_namespace) FLUXBOT_ALLOWED_NAMESPACES=$(allowed_namespaces) ./bin/hubot --adapter slack
 
 build_and_run: build
 build_and_run: run
