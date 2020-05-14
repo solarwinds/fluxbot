@@ -1,4 +1,4 @@
-repo_owner:=trevrosen
+repo_owner:=solarwinds
 repo_name:=fluxbot
 robot_name:=fluxbot
 robot_description:="A Hubot to control FluxCD"
