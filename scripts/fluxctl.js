@@ -51,7 +51,7 @@ module.exports = function(robot) {
   // workloads provides all workloads in the given namespace
   //
   robot.respond(/workloads\s*(\w+)?$/i, function(msg) {
-    args =  ["list-workloads", "-o json"]
+    args =  ["list-workloads"]
 
     var namespace = msg.match[1]
 
