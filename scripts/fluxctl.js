@@ -126,11 +126,19 @@ module.exports = function(robot) {
     const cmd = this.spawn("fluxctl", args);
 
     cmd.stdout.on('data', data => {
-      msg.send(data)
+      if (debug) {
+        console.log("STDOUT:")
+        console.log(data.toString())
+      }
+      msg.send(data.toString())
     });
 
     cmd.stderr.on('data', data => {
-      msg.send(data)
+      if (debug) {
+        console.log("STDERR:")
+        console.log(data.toString())
+      }
+      msg.send(data.toString())
     });
 
     return cmd.on('close', function(code) {
@@ -146,7 +154,7 @@ module.exports = function(robot) {
   //   - match[2] -- workload name with "deployment" assumed
   //   - match[3] -- image name without ECR prefix
   //   - match[4] -- image tag (e.g. 1.2.3)
-  return robot.respond(/deploy (.*) (.*) (.*)/i, function(msg) {
+  return robot.respond(/deploy (.*) (.*) (.*) (.*)/i, function(msg) {
     const repoPrefix = process.env.FLUXBOT_REPO_PREFIX;
 
     const ns           = msg.match[1];
@@ -166,11 +174,19 @@ module.exports = function(robot) {
     const cmd = this.spawn("fluxctl", args);
 
     cmd.stdout.on('data', data => {
-      msg.send(data)
+      if (debug) {
+        console.log("STDOUT:")
+        console.log(data.toString())
+      }
+      msg.send(data.toString())
     });
 
     cmd.stderr.on('data', data => {
-      msg.send(data)
+      if (debug) {
+        console.log("STDERR:")
+        console.log(data.toString())
+      }
+      msg.send(data.toString())
     });
 
     return cmd.on('close', function(code) {
