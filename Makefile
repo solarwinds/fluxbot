@@ -8,7 +8,7 @@ allowed_namespaces:="demo,applications"
 
 flux_forward_namespace:="flux"
 
-git_tag:=$(git describe --abbrev=0 --tags)
+git_tag:=$(shell git describe --abbrev=0 --tags)
 
 .PHONY: run-local
 run-local:
