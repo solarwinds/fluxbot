@@ -14,6 +14,8 @@
 //
 
 
+var fluxmsg = require('fluxctl-messages')
+
 module.exports = function(robot) {
   var allowed_namespaces
   var debug = false
@@ -73,8 +75,10 @@ module.exports = function(robot) {
     msg.send(`Running [${args}]`);
 
     const cmd = this.spawn("fluxctl", args);
-
     cmd.stdout.on('data', data => {
+      fluxmsg.listWorkloadsData(data.toString())
+
+
       if (debug) {
         console.log("STDOUT:")
         console.log(data.toString())
