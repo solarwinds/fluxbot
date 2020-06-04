@@ -1,4 +1,5 @@
 var Mustache = require("mustache");
+Mustache.escape = function(text) {return text}; // disable escaping
 
 var singleWorkloadTmpl = `
 *{{ID}}*
@@ -7,9 +8,9 @@ var singleWorkloadTmpl = `
 *Pods Ready/Desired*: {{Rollout.Ready}}/{{Rollout.Desired}}
 
 *Containers*
-  {{#containers}}
+  {{#Containers}}
     {{> singleContainer}}
-  {{/containers}}
+  {{/Containers}}
 
 *Automation settings*
 
